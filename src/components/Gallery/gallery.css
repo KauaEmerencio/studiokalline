@@ -1,0 +1,4 @@
+/* Garante que o efeito de esteira contínua não deixe "saltos" nas bordas */
+.kaline-gallery .swiper-wrapper {
+  transition-timing-function: linear !important;
+}

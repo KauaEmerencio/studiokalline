@@ -1,0 +1,28 @@
+import { motion } from "framer-motion";
+import type { ReactNode } from "react";
+
+interface RevealProps {
+  children: ReactNode;
+  delay?: number;
+  y?: number;
+  className?: string;
+  as?: "div" | "span";
+}
+
+/**
+ * Wrapper de scroll-reveal padronizado. Mantém as animações
+ * discretas e consistentes em toda a página (fade + leve subida).
+ */
+export default function Reveal({ children, delay = 0, y = 20, className = "" }: RevealProps) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
