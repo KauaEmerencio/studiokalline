@@ -1,4 +1,5 @@
 // Conteúdo central do site.
+
 import gallery1 from "../assets/gallery/gallery-1.jpg";
 import gallery2 from "../assets/gallery/gallery-2.jpg";
 import gallery3 from "../assets/gallery/gallery-3.jpg";
@@ -27,10 +28,7 @@ export const HERO = {
   subtitle: "Realce sua beleza com cílios que valorizam o seu olhar.",
   subtitleHighlight: "seu olhar",
   caption: "Escolha o melhor dia e horário na nossa",
-  captionLink: "agenda online.",
-  indicators: [
- 
-  ],
+  captionLink: "agenda online."
 };
 
 export const BENEFITS = [

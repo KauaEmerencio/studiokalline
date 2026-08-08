@@ -1,11 +1,10 @@
 import { motion, type Variants } from "framer-motion";
-import { Users, Sparkles, Clock, Plus, Heart } from "lucide-react";
+import { Plus } from "lucide-react";
 import CTAButton from "../CTA/CTAButton";
 import { HERO, BOOKING_URL } from "../../data/site";
 import heroImg from "../../assets/Hero.jpg";
 import heroImgDesktop from "../../assets/Hero2.jpg";
 
-const ICONS = { Users, Sparkles, Clock } as const;
 const container: Variants = {
   hidden: {},
   show: {
@@ -23,29 +22,31 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative min-h-[100svh] w-full overflow-hidden bg-ink">
+      {/* Foto de fundo — foto vertical no mobile, foto widescreen no desktop */}
       <img
         src={heroImg}
         alt="Darc Kaline"
-        className="absolute inset-0 h-full w-full object-cover lg:hidden"  />
+        className="absolute inset-0 h-full w-full object-cover lg:hidden"
+      />
       <img
         src={heroImgDesktop}
         alt="Darc Kaline"
-        className="absolute inset-0 hidden h-full w-full object-cover lg:block"   />
+        className="absolute inset-0 hidden h-full w-full object-cover lg:block"
+      />
+
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-ink/10 to-ink/95" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/15 to-transparent" />
       <div className="absolute inset-0 hidden bg-gradient-to-r from-ink/60 via-ink/20 to-transparent lg:block" />
+
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
         className="container-page relative z-10 flex min-h-[100svh] flex-col justify-end pb-16 pt-24 lg:mx-0 lg:max-w-2xl lg:justify-center lg:pb-28 lg:pl-16 lg:pt-32 xl:pl-24"
       >
-        <motion.span variants={item} className="eyebrow flex items-center gap-1.5 text-rose-200">
-          {HERO.eyebrow} <Heart size={11} fill="currentColor" strokeWidth={0} />
-        </motion.span>
         <motion.h1
           variants={item}
-          className="mt-1.5 font-display text-[2.6rem] leading-[0.95] tracking-wide text-white sm:text-6xl lg:text-7xl xl:text-8xl"
+          className="font-display text-[2.6rem] leading-[0.95] tracking-wide text-white sm:text-6xl lg:text-7xl xl:text-8xl"
         >
           DARC
           <br />
@@ -71,24 +72,6 @@ export default function Hero() {
           <span className="text-rose-300">{HERO.subtitleHighlight}</span>
           {after}
         </motion.p>
-
-        <motion.ul
-          variants={item}
-          className="mt-5 flex flex-col items-start gap-2 sm:mt-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-2"
-        >
-          {HERO.indicators.map((ind) => {
-            const Icon = ICONS[ind.icon as keyof typeof ICONS];
-            return (
-              <li
-                key={ind.label}
-                className="flex items-center gap-1.5 font-body text-[10.5px] font-light text-white/90 sm:gap-2 sm:text-[12.5px]"
-              >
-                <Icon size={13} strokeWidth={1.5} className="shrink-0 text-rose-200" />
-                {ind.label}
-              </li>
-            );
-          })}
-        </motion.ul>
 
         <motion.div variants={item} className="mt-6 w-full sm:max-w-md">
           <CTAButton />
