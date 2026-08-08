@@ -3,7 +3,7 @@ import { MapPin } from "lucide-react";
 import Reveal from "../shared/Reveal";
 import { SOCIAL_LINKS } from "../../data/site";
 
-// Ícones de marca (WhatsApp, TikTok) — traçados oficiais do Simple Icons
+// Ícones de marca (WhatsApp, TikTok) traçados oficiais do Simple Icons
 // (simpleicons.org, licença CC0, sem risco de marca incorreta).
 function WhatsAppIcon({ size = 18 }: { size?: number }) {
   return (

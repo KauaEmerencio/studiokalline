@@ -9,11 +9,11 @@ const NAV_LINKS = [
   { href: "#conecte-se", label: "Contato" },
 ];
 
-// Créditos de desenvolvimento — edite aqui se algum dado mudar.
+// Créditos de desenvolvimento
 const DEV = {
   name: "KL DEV TECH",
   tagline: "Desenvolvimento web com foco em performance e design.",
-  email: "kauaemerencioo2@gmail.com",
+  email: "kauaemerencio2@gmail.com",
   whatsapp: "https://wa.me/5579998107310",
 };
 
@@ -37,14 +37,14 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <img src={logo} alt="" className="h-9 w-9 object-contain" />
             <div>
-              <span className="block font-display text-xl leading-none text-cream">Studio Kaline</span>
+              <span className="block font-display text-xl leading-none text-cream">Darc Kaline</span>
               <span className="mt-1 block font-body text-[9.5px] uppercase tracking-widest2 text-rose-300/80">
-                Cílios que valorizam o seu olhar
+                Lash Designer
               </span>
             </div>
           </div>
           <p className="mt-4 max-w-xs font-body text-[12.5px] font-light leading-relaxed text-cream/50">
-            Cuidado, delicadeza e atenção em cada detalhe — para você se sentir ainda mais bonita
+            Cuidado, delicadeza e atenção em cada detalhe, para você se sentir ainda mais bonita
             todos os dias.
           </p>
         </div>
@@ -158,7 +158,7 @@ export default function Footer() {
         </div>
 
         <p className="mt-6 text-center font-body text-[10.5px] font-light text-cream/35">
-          © {new Date().getFullYear()} Studio Kaline. Todos os direitos reservados.
+          © {new Date().getFullYear()} Darc Kaline. Todos os direitos reservados.
         </p>
       </div>
     </footer>

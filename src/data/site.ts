@@ -1,7 +1,4 @@
 // Conteúdo central do site.
-// Edite os valores abaixo para atualizar textos, links e contatos
-// sem precisar mexer nos componentes.
-
 import gallery1 from "../assets/gallery/gallery-1.jpg";
 import gallery2 from "../assets/gallery/gallery-2.jpg";
 import gallery3 from "../assets/gallery/gallery-3.jpg";
@@ -9,6 +6,7 @@ import gallery4 from "../assets/gallery/gallery-4.jpg";
 import gallery5 from "../assets/gallery/gallery-5.jpg";
 import gallery6 from "../assets/gallery/gallery-6.jpg";
 import gallery7 from "../assets/gallery/gallery-7.jpg";
+import gallery8 from "../assets/gallery/gallery-8.jpg";
 export const BOOKING_URL = "https://online.maapp.com.br/darclashdesigne";
 
 export const CONTACT = {
@@ -25,16 +23,13 @@ export const CONTACT = {
 };
 
 export const HERO = {
-  eyebrow: "Bem-vinda ao",
-  title: "STUDIO KALINE",
+  title: " Darc Kaline - Lash Designer",
   subtitle: "Realce sua beleza com cílios que valorizam o seu olhar.",
   subtitleHighlight: "seu olhar",
   caption: "Escolha o melhor dia e horário na nossa",
   captionLink: "agenda online.",
   indicators: [
-    { icon: "Users", label: "+300 clientes atendidas" },
-    { icon: "Sparkles", label: "Atendimento personalizado" },
-    { icon: "Clock", label: "Agendamento online em menos de 1 minuto" },
+ 
   ],
 };
 
@@ -64,6 +59,7 @@ export const GALLERY_IMAGES = [
   { id: 5, src: gallery5, label: "Trabalho realizado no Studio Kaline" },
   { id: 6, src: gallery6, label: "Trabalho realizado no Studio Kaline" },
   { id: 7, src: gallery7, label: "Trabalho realizado no Studio Kaline" },
+  { id: 8, src: gallery8, label: "Trabalho realizado no Studio Kaline" },
 ];
 
 export const TESTIMONIALS = [

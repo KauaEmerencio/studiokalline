@@ -4,12 +4,6 @@ interface GazeLineProps {
   className?: string;
   width?: number;
 }
-
-/**
- * Assinatura visual da página: uma curva inspirada no traçado de um
- * cílio / fio de eyeliner alado. Aparece com moderação — como marca
- * de transição entre seções e como reforço sob frases-chave.
- */
 export default function GazeLine({ className = "", width = 120 }: GazeLineProps) {
   return (
     <motion.svg

@@ -26,7 +26,7 @@ export default {
       },
       fontFamily: {
         display: ["'Cormorant Garamond'", "serif"],
-        body: ["'Google Sans'", "'Poppins'", "sans-serif"],
+        body: ["Inter", "sans-serif"],
       },
       letterSpacing: {
         widest2: "0.35em",

@@ -8,14 +8,7 @@ interface PlaceholderPhotoProps {
   iconSize?: number;
 }
 
-/**
- * Espaço reservado para fotografia real do estúdio.
- *
- * Este projeto é entregue sem fotos definitivas — troque este
- * componente por uma tag <img> apontando para src/assets quando as
- * fotos profissionais estiverem prontas. Mantido elegante de
- * propósito para que o layout já possa ser avaliado com fidelidade.
- */
+
 export default function PlaceholderPhoto({
   label,
   ariaLabel,

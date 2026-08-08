@@ -1,8 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles, Image, Star, Phone, CalendarHeart } from "lucide-react";
 import { BOOKING_URL } from "../../data/site";
-import logo from "../../assets/logo-icon.png";
+import logoDark from "../../assets/logo-icon.png";
+import logoLight from "../../assets/logo-icon-light.png";
 
 const NAV_LINKS = [
   { href: "#diferenciais", label: "Diferenciais", icon: Sparkles },
@@ -13,11 +14,25 @@ const NAV_LINKS = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [onPhoto, setOnPhoto] = useState(true);
   const btnRef = useRef<HTMLButtonElement>(null);
+
+ 
+  useEffect(() => {
+    const target = document.getElementById("top");
+    if (!target) {
+      setOnPhoto(false);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => setOnPhoto(entry.isIntersecting), {
+      threshold: 0,
+    });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
 
   const toggle = () => {
     setOpen((v) => !v);
-    // Evita o anel de foco "preso" no botão depois do toque no celular
     btnRef.current?.blur();
   };
 
@@ -25,16 +40,22 @@ export default function Header() {
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="container-page flex h-16 items-center justify-between lg:h-20">
         <a href="#top" className="flex items-center">
-          <img src={logo} alt="Darc Kaline Lash Designer" className="h-8 w-auto sm:h-9 lg:h-11" />
+          <img
+            src={onPhoto ? logoLight : logoDark}
+            alt="Darc Kaline Lash Designer"
+            className="h-8 w-auto transition-opacity duration-300 sm:h-9 lg:h-11"
+          />
         </a>
 
-        {/* Navegação de desktop — visível apenas em telas grandes */}
+        {/* desktop  */}
         <nav className="hidden items-center gap-8 lg:flex">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="font-body text-[13px] text-ink-soft transition-colors hover:text-rose-600"
+              className={`font-body text-[13px] transition-colors ${
+                onPhoto ? "text-white/85 hover:text-white" : "text-ink-soft hover:text-rose-600"
+              }`}
             >
               {link.label}
             </a>
@@ -49,16 +70,39 @@ export default function Header() {
           </a>
         </nav>
 
-        {/* Botão de menu — visível apenas em mobile/tablet */}
-        <button
-          ref={btnRef}
-          onClick={toggle}
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={open}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-cream/80 text-ink shadow-card backdrop-blur-sm transition-colors hover:bg-cream focus:outline-none focus-visible:outline-none lg:hidden"
-        >
-          {open ? <X size={17} strokeWidth={1.6} /> : <Menu size={17} strokeWidth={1.6} />}
-        </button>
+        {/* Mobile */}
+        <div className="flex items-center gap-2.5 lg:hidden">
+          <AnimatePresence>
+            {onPhoto && !open && (
+              <motion.a
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.25 }}
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-rose-gradient px-4 py-2 font-body text-[10.5px] font-medium uppercase tracking-wide text-white shadow-card"
+              >
+                Agendar
+              </motion.a>
+            )}
+          </AnimatePresence>
+
+          <button
+            ref={btnRef}
+            onClick={toggle}
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={open}
+            className={`flex h-10 w-10 items-center justify-center rounded-full shadow-card backdrop-blur-sm transition-colors focus:outline-none focus-visible:outline-none ${
+              onPhoto && !open
+                ? "bg-white/15 text-white hover:bg-white/25"
+                : "bg-cream/80 text-ink hover:bg-cream"
+            }`}
+          >
+            {open ? <X size={17} strokeWidth={1.6} /> : <Menu size={17} strokeWidth={1.6} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>

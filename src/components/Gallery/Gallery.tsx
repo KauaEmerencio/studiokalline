@@ -18,7 +18,6 @@ export default function Gallery() {
       </div>
 
       <Reveal delay={0.1} className="mt-6 sm:mt-10">
-        {/* Autoplay contínuo (efeito "esteira") — arraste para pausar, solta e ele retoma sozinho */}
         <Swiper
           modules={[Autoplay]}
           autoplay={{ delay: 1, disableOnInteraction: false, pauseOnMouseEnter: true }}

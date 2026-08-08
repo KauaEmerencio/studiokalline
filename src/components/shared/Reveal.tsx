@@ -9,10 +9,7 @@ interface RevealProps {
   as?: "div" | "span";
 }
 
-/**
- * Wrapper de scroll-reveal padronizado. Mantém as animações
- * discretas e consistentes em toda a página (fade + leve subida).
- */
+
 export default function Reveal({ children, delay = 0, y = 20, className = "" }: RevealProps) {
   return (
     <motion.div
