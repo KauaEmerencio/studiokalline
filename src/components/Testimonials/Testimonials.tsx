@@ -1,40 +1,49 @@
-import { Star } from "lucide-react";
-import Reveal from "../shared/Reveal";
 import { TESTIMONIALS } from "../../data/site";
-import avatar1 from "../../assets/gallery/gallery-1.jpg";
-import avatar2 from "../../assets/gallery/gallery-2.jpg";
-import avatar3 from "../../assets/gallery/gallery-3.jpg";
+import avatar1 from "../../assets/testimonials/avatar-1.webp";
+import avatar2 from "../../assets/testimonials/avatar-2.webp";
+import avatar3 from "../../assets/testimonials/avatar-3.webp";
 
 const AVATARS = [avatar1, avatar2, avatar3];
 
 export default function Testimonials() {
   return (
-    <section id="depoimentos" className="container-page py-12 sm:py-20">
-      <Reveal className="mx-auto max-w-lg text-center">
-        <span className="eyebrow text-[10px] sm:text-xs">O que minhas clientes dizem</span>
-      </Reveal>
+    <section
+      id="depoimentos"
+      aria-labelledby="depoimentos-title"
+      className="container-page py-16 sm:py-20 lg:py-24"
+    >
+      <div className="mx-auto max-w-2xl text-center">
+        <h2
+          id="depoimentos-title"
+          className="mt-4 font-display text-[2.125rem] leading-[1.1] text-ink sm:text-[2.75rem] lg:text-[3.4rem]">
+          A experiência de quem já passou por aqui.
+        </h2>
+      </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-6">
+      <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-3">
         {TESTIMONIALS.map((t, i) => (
-          <Reveal key={t.name} delay={i * 0.1}>
-            <div className="flex h-full flex-col items-center rounded-2xl border border-ink/5 bg-cream-soft px-5 py-5 text-center shadow-card sm:rounded-3xl sm:px-7 sm:py-7">
+          <figure
+            key={t.name}
+            className="m-0 flex min-w-0 flex-col rounded-3xl border border-rose-200/70 bg-cream-soft p-6 text-left shadow-card lg:p-7"
+          >
+            <blockquote className="font-body text-base font-normal leading-[1.65] text-ink lg:text-[17px]">
+              <p>“{t.text}”</p>
+            </blockquote>
+            <figcaption className="mt-auto flex items-center gap-3 pt-6">
               <img
                 src={AVATARS[i % AVATARS.length]}
-                alt={t.name}
+                alt=""
+                width={144}
+                height={144}
                 loading="lazy"
-                className="h-10 w-10 rounded-full object-cover ring-2 ring-white sm:h-14 sm:w-14"
+                decoding="async"
+                className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-white"
               />
-              <div className="mt-2 flex gap-0.5 text-rose-500 sm:mt-3">
-                {Array.from({ length: 5 }).map((_, idx) => (
-                  <Star key={idx} size={11} fill="currentColor" strokeWidth={0} />
-                ))}
-              </div>
-              <p className="mt-2 flex-1 font-body text-[11.5px] font-light italic leading-snug text-ink-soft sm:mt-3 sm:text-[13px] sm:leading-relaxed">
-                “{t.text}”
-              </p>
-              <span className="mt-3 font-display text-base text-ink sm:mt-4 sm:text-lg">— {t.name}</span>
-            </div>
-          </Reveal>
+              <span className="min-w-0 break-words font-display text-2xl leading-tight text-ink">
+                {t.name}
+              </span>
+            </figcaption>
+          </figure>
         ))}
       </div>
     </section>

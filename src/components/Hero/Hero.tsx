@@ -1,7 +1,7 @@
 import { motion, type Variants } from "framer-motion";
 import { Plus } from "lucide-react";
 import CTAButton from "../CTA/CTAButton";
-import { HERO, BOOKING_URL } from "../../data/site";
+import { HERO } from "../../data/site";
 import heroImg from "../../assets/Hero.jpg";
 import heroImgDesktop from "../../assets/Hero2.jpg";
 
@@ -78,12 +78,10 @@ export default function Hero() {
         </motion.div>
 
         <motion.p variants={item} className="mt-3 font-body text-[11px] font-light text-white/70 sm:text-[12px]">
-          {HERO.caption}{" "}
+          {HERO.caption}
           <a
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-rose-300 underline underline-offset-2 hover:text-rose-200"
+            href="#estilos"
+            className="mt-2 block w-fit text-rose-300 underline underline-offset-2 hover:text-rose-200"
           >
             {HERO.captionLink}
           </a>

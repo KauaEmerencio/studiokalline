@@ -11,8 +11,8 @@ const NAV_LINKS = [
 
 // Créditos de desenvolvimento
 const DEV = {
-  name: "KL DEV TECH",
-  tagline: "Desenvolvimento web com foco em performance e design.",
+  name: "KL Software",
+  tagline: "Desenvolvimento web",
   email: "kauaemerencio2@gmail.com",
   whatsapp: "https://wa.me/5579998107310",
 };
@@ -30,7 +30,7 @@ function ColumnHeading({ children }: { children: string }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-ink px-6 pb-28 pt-14 text-cream/70 sm:pb-14 lg:pt-20">
+    <footer className="bg-ink px-6 pb-14 pt-14 text-cream/70 lg:pt-20">
       <div className="container-page grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_1fr_1fr] lg:gap-12">
         {/* Marca */}
         <div>

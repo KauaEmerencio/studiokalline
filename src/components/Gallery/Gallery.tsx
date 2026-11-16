@@ -10,7 +10,6 @@ export default function Gallery() {
     <section id="galeria" className="bg-cream-soft py-12 sm:py-20">
       <div className="container-page">
         <Reveal className="mx-auto max-w-lg text-center">
-          <span className="eyebrow text-[10px] sm:text-xs">Nossos trabalhos</span>
           <h2 className="section-title mt-1.5 text-[1.6rem] sm:mt-3 sm:text-5xl">
             Olhares que encantam <span className="text-rose-500">♡</span>
           </h2>
