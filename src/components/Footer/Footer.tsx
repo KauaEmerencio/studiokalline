@@ -12,7 +12,6 @@ const NAV_LINKS = [
 // Créditos de desenvolvimento
 const DEV = {
   name: "KL Software",
-  tagline: "Desenvolvimento web",
   email: "kauaemerencio2@gmail.com",
   whatsapp: "https://wa.me/5579998107310",
 };
@@ -20,9 +19,9 @@ const DEV = {
 function ColumnHeading({ children }: { children: string }) {
   return (
     <div className="mb-5">
-      <h3 className="font-body text-[11px] font-medium uppercase tracking-widest2 text-rose-300">
+      <h2 className="font-body text-[11px] font-medium uppercase tracking-widest2 text-rose-300">
         {children}
-      </h3>
+      </h2>
       <span className="mt-2 block h-px w-6 bg-rose-400/60" />
     </div>
   );
@@ -43,7 +42,7 @@ export default function Footer() {
               </span>
             </div>
           </div>
-          <p className="mt-4 max-w-xs font-body text-[12.5px] font-light leading-relaxed text-cream/50">
+          <p className="mt-4 max-w-xs font-body text-[12.5px] font-light leading-relaxed text-cream/60">
             Cuidado, delicadeza e atenção em cada detalhe, para você se sentir ainda mais bonita
             todos os dias.
           </p>
@@ -128,28 +127,25 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3 text-center sm:text-left">
             <Code2 size={18} strokeWidth={1.5} className="hidden shrink-0 text-rose-300 sm:block" />
-            <p className="font-body text-[12px] font-light leading-relaxed text-cream/50">
+            <p className="font-body text-[12px] font-light leading-relaxed text-cream/60">
               Desenvolvido por{" "}
               <span className="font-medium text-cream/80">{DEV.name}</span>
-              <br className="sm:hidden" />
-              <span className="hidden sm:inline"> — </span>
-              {DEV.tagline}
             </p>
           </div>
 
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:justify-end">
             <a
               href={`mailto:${DEV.email}`}
-              className="flex items-center gap-2 font-body text-[12px] font-light text-cream/50 transition-colors hover:text-cream"
+              className="flex max-w-full min-w-0 items-center gap-2 font-body text-[12px] font-light text-cream/60 transition-colors hover:text-cream"
             >
-              <Mail size={15} strokeWidth={1.5} className="text-rose-300" />
-              {DEV.email}
+              <Mail size={15} strokeWidth={1.5} className="shrink-0 text-rose-300" />
+              <span className="min-w-0 break-all">{DEV.email}</span>
             </a>
             <a
               href={DEV.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 font-body text-[12px] font-light text-cream/50 transition-colors hover:text-cream"
+              className="flex items-center gap-2 font-body text-[12px] font-light text-cream/60 transition-colors hover:text-cream"
             >
               <Phone size={15} strokeWidth={1.5} className="text-rose-300" />
               WhatsApp
@@ -157,7 +153,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="mt-6 text-center font-body text-[10.5px] font-light text-cream/35">
+        <p className="mt-6 text-center font-body text-[10.5px] font-light text-cream/60">
           © {new Date().getFullYear()} Darc Kaline. Todos os direitos reservados.
         </p>
       </div>

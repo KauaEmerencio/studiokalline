@@ -36,7 +36,7 @@ export default {
         card: "0 12px 40px -20px rgba(43, 38, 34, 0.18)",
       },
       backgroundImage: {
-        "rose-gradient": "linear-gradient(135deg, #D9A8AE 0%, #B8828A 55%, #9C5D68 100%)",
+        "rose-gradient": "linear-gradient(135deg, #9C5D68 0%, #7E4750 100%)",
         "rose-gradient-soft": "linear-gradient(180deg, rgba(43,38,34,0) 0%, rgba(43,38,34,0.55) 100%)",
       },
       animation: {

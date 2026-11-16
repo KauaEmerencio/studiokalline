@@ -7,9 +7,14 @@ interface LashPhotoDialogProps {
   onClose: () => void;
 }
 
-function GalleryImage({ photo }: { photo: LashPhoto }) {
+function GalleryImage({ photo }: { photo?: LashPhoto }) {
   const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
   const labels = LASH_STYLES.photoDialog;
+  const source = photo?.fullSrc?.trim() || photo?.src?.trim();
+
+  if (!photo || !source) {
+    return <p role="status" className="absolute inset-0 flex items-center justify-center px-6 text-center font-body text-sm leading-relaxed text-cream">{labels.errorLabel}</p>;
+  }
 
   return (
     <>
@@ -19,7 +24,7 @@ function GalleryImage({ photo }: { photo: LashPhoto }) {
         </p>
       )}
       <img
-        src={photo.fullSrc || photo.src}
+        src={source}
         alt={photo.alt}
         width={photo.fullWidth ?? photo.width}
         height={photo.fullHeight ?? photo.height}
@@ -40,15 +45,19 @@ export default function LashPhotoDialog({ model, onClose }: LashPhotoDialogProps
   const [photoIndex, setPhotoIndex] = useState(0);
   const labels = LASH_STYLES.photoDialog;
   const titleId = `photo-dialog-${model.id}`;
-  const photo = model.photos[photoIndex];
-  const multiple = model.photos.length > 1;
-  const counter = labels.counterLabel.replace("{current}", String(photoIndex + 1))
-    .replace("{total}", String(model.photos.length));
+  const photos = model.photos ?? [];
+  const currentIndex = photoIndex >= 0 && photoIndex < photos.length ? photoIndex : 0;
+  const photo = photos[currentIndex];
+  const multiple = photos.length > 1;
+  const counter = labels.counterLabel.replace("{current}", String(photos.length ? currentIndex + 1 : 0))
+    .replace("{total}", String(photos.length));
 
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
 
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
     const root = document.documentElement;
     const previousOverflow = root.style.overflow;
     const previousPadding = root.style.paddingRight;
@@ -58,18 +67,22 @@ export default function LashPhotoDialog({ model, onClose }: LashPhotoDialogProps
     }
     root.style.overflow = "hidden";
     dialog.showModal();
-    closeRef.current?.focus();
+    closeRef.current?.focus({ preventScroll: true });
 
     return () => {
       root.style.overflow = previousOverflow;
       root.style.paddingRight = previousPadding;
       if (dialog.open) dialog.close();
+      window.scrollTo({ left: scrollX, top: scrollY, behavior: "instant" });
     };
   }, []);
 
   const close = () => dialogRef.current?.close();
   const move = (direction: number) => {
-    if (multiple) setPhotoIndex(index => (index + direction + model.photos.length) % model.photos.length);
+    if (multiple) setPhotoIndex(index => {
+      const validIndex = index >= 0 && index < photos.length ? index : 0;
+      return (validIndex + direction + photos.length) % photos.length;
+    });
   };
   const zoomed = () => (window.visualViewport?.scale ?? 1) > 1.01;
   const startSwipe = (event: TouchEvent<HTMLDivElement>) => {
@@ -84,8 +97,6 @@ export default function LashPhotoDialog({ model, onClose }: LashPhotoDialogProps
     const dy = event.changedTouches[0].clientY - start.y;
     if (Math.abs(dx) >= 60 && Math.abs(dx) > Math.abs(dy) * 1.5) move(dx < 0 ? 1 : -1);
   };
-
-  if (!photo) return null;
 
   return (
     <dialog
@@ -126,7 +137,7 @@ export default function LashPhotoDialog({ model, onClose }: LashPhotoDialogProps
           onTouchEnd={endSwipe}
           onTouchCancel={() => { swipeStart.current = null; }}
         >
-          <GalleryImage key={photo.id} photo={photo} />
+          <GalleryImage key={`${currentIndex}:${photo?.id ?? "missing"}:${photo?.fullSrc ?? photo?.src ?? ""}`} photo={photo} />
         </div>
         <div className="flex min-h-16 items-center justify-between gap-3 border-t border-white/10 px-4 py-2 sm:px-6">
           {multiple && (

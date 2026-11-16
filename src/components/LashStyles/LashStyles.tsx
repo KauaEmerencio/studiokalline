@@ -24,8 +24,9 @@ export default function LashStyles() {
 
       <div className="mt-8 grid grid-cols-1 gap-6 sm:mt-10 md:grid-cols-2 lg:grid-cols-4">
         {LASH_STYLES.models.map((model, index) => {
-          const cover = model.photos[0];
-          const count = model.photos.length;
+          const photos = model.photos ?? [];
+          const cover = photos[0];
+          const count = photos.length;
           const labels = LASH_STYLES.photoDialog;
           const openLabel = (count === 1 ? labels.singleOpenLabel : labels.openLabel)
             .replace("{name}", model.name).replace("{count}", String(count));
@@ -35,7 +36,7 @@ export default function LashStyles() {
           <Reveal key={model.id} delay={index * 0.08}>
             <article className="h-full overflow-hidden rounded-2xl border border-ink/5 bg-cream-soft shadow-card sm:rounded-3xl">
               <div className="aspect-[4/3] w-full bg-white">
-                {cover?.src.trim() && (
+                {cover?.src?.trim() && (
                   <button
                     type="button"
                     aria-label={openLabel}

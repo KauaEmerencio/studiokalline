@@ -63,8 +63,7 @@ export const HERO = {
   title: " Darc Kaline - Lash Designer",
   subtitle: "Realce sua beleza com cílios que valorizam o seu olhar.",
   subtitleHighlight: "seu olhar",
-  caption: "Descubra o estilo de cílios que valoriza a singularidade do seu olhar.",
-  captionLink: "Conheça nossos modelos ↓"
+  captionLink: "Explore os modelos de cílios"
 };
 
 export const BENEFITS = [

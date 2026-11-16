@@ -1,3 +1,6 @@
+import { useEffect, useRef, useState } from "react";
+import { useInView, useReducedMotion } from "framer-motion";
+import type { Swiper as SwiperInstance } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -6,8 +9,27 @@ import { GALLERY_IMAGES } from "../../data/site";
 import "./gallery.css";
 
 export default function Gallery() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { margin: "200px" });
+  const reducedMotion = useReducedMotion();
+  const [swiper, setSwiper] = useState<SwiperInstance | null>(null);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+
+  useEffect(() => {
+    if (!swiper || swiper.destroyed) return;
+    if (hovered || focused || reducedMotion || !inView) {
+      const position = swiper.getTranslate();
+      swiper.autoplay.stop();
+      swiper.setTransition(0);
+      swiper.setTranslate(position);
+    } else {
+      swiper.autoplay.start();
+    }
+  }, [swiper, hovered, focused, reducedMotion, inView]);
+
   return (
-    <section id="galeria" className="bg-cream-soft py-12 sm:py-20">
+    <section ref={sectionRef} id="galeria" className="bg-cream-soft pt-12 sm:pb-8 sm:pt-20">
       <div className="container-page">
         <Reveal className="mx-auto max-w-lg text-center">
           <h2 className="section-title mt-1.5 text-[1.6rem] sm:mt-3 sm:text-5xl">
@@ -17,7 +39,19 @@ export default function Gallery() {
       </div>
 
       <Reveal delay={0.1} className="mt-6 sm:mt-10">
+        <div
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onFocusCapture={() => setFocused(true)}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
+          }}
+        >
         <Swiper
+          onSwiper={setSwiper}
+          tabIndex={0}
+          role="region"
+          aria-label="Galeria de trabalhos"
           modules={[Autoplay]}
           autoplay={{ delay: 1, disableOnInteraction: false, pauseOnMouseEnter: true }}
           speed={5000}
@@ -44,6 +78,7 @@ export default function Gallery() {
             </SwiperSlide>
           ))}
         </Swiper>
+        </div>
       </Reveal>
     </section>
   );

@@ -1,93 +1,73 @@
-# Studio Kaline — Landing Page
+# Studio Kaline
 
-Landing page premium para o Studio Kaline (extensão de cílios), construída para uso como link da bio do Instagram.
+Landing page do Studio Kaline para apresentação dos serviços e acesso ao agendamento.
 
-## Stack
+## Desenvolvimento
 
-React + Vite + TypeScript + Tailwind CSS + Framer Motion + Lucide React + Swiper.
+Requer uma versão do Node compatível com o Vite instalado. Nesta revisão foi usado Node 20.19.2.
 
-## Como rodar
-
-```bash
-npm install
+```sh
+npm ci
 npm run dev
 ```
 
-Abra `http://localhost:5173`.
+Stack: React, TypeScript, Vite, Tailwind CSS, Framer Motion, Lucide React e Swiper.
+Fontes: Cormorant Garamond e Inter, solicitadas ao Google Fonts.
 
-Build de produção:
+## Validação e produção
 
-```bash
+```sh
+npm run check:integrity
+npm test
+npm run lint
 npm run build
 npm run preview
 ```
 
-## O que editar antes de publicar
+O build executa TypeScript e gera a versão estática em `dist/`.
+O preview serve esse build; não é um servidor de produção.
+A aplicação tem uma rota pública (`/`) e seções acessadas por âncoras.
 
-### 1. Fotos (mais importante)
+O teste de navegador é opcional e precisa de uma instalação de Playwright com
+Chromium disponível, além do preview em execução:
 
-O projeto foi entregue **sem fotos definitivas** — os espaços de imagem usam o
-componente `src/components/shared/PlaceholderPhoto.tsx` (um gradiente suave
-com um ícone de câmera) só para você avaliar o layout com fidelidade, sem
-usar nenhuma foto de terceiros.
-
-Para trocar por fotos reais:
-
-1. Coloque os arquivos em `src/assets/` (ex: `hero.jpg`, `galeria-1.jpg`).
-2. No componente correspondente (`Hero.tsx`, `Gallery.tsx`), troque:
-   ```tsx
-   <PlaceholderPhoto ... />
-   ```
-   por:
-   ```tsx
-   <img src={heroImg} alt="Studio Kaline" className="h-full w-full object-cover" />
-   ```
-   (importando a imagem no topo do arquivo: `import heroImg from "../../assets/hero.jpg"`).
-
-Recomendação: fotos verticais, em boa luz, estilo ensaio — evite selfies ou
-fotos com fundo de carro/casa, conforme o briefing.
-
-### 2. Textos, links e contatos
-
-Tudo fica centralizado em **`src/data/site.ts`**:
-
-- `BOOKING_URL` — link de agendamento (Maapp).
-- `CONTACT` — WhatsApp, Instagram, TikTok e localização.
-- `HERO`, `BENEFITS`, `GALLERY_IMAGES`, `TESTIMONIALS` — todos os textos da página.
-
-Edite os valores ali; os componentes atualizam automaticamente.
-
-### 3. Cores e tipografia
-
-Definidas em `tailwind.config.js` (paleta `cream`, `ink`, `rose`) e nas fontes
-importadas em `index.html` (Cormorant Garamond + Poppins).
-
-## Estrutura
-
-```
-src/
-├── assets/          → fotos reais entram aqui
-├── components/
-│   ├── Header/
-│   ├── Hero/
-│   ├── CTA/          → botão de agendamento reutilizável
-│   ├── Benefits/      → "Diferenciais"
-│   ├── Gallery/        → carrossel Swiper
-│   ├── Testimonials/
-│   ├── SocialLinks/
-│   ├── StickyCTA/       → botão fixo inferior
-│   ├── Footer/
-│   └── shared/           → GazeLine (assinatura visual), Reveal, PlaceholderPhoto
-├── data/site.ts            → todo o conteúdo editável
-├── hooks/
-├── pages/Home/
-└── styles/globals.css
+```sh
+node scripts/test-production.cjs playwright http://127.0.0.1:4173
 ```
 
-## Assinatura visual: "linha do olhar"
+O primeiro argumento também pode ser o caminho de uma instalação existente do
+Playwright. O roteiro cobre os quatro tamanhos de tela, galerias, erros de rede,
+teclado, foco, pausa do carrossel, movimento reduzido e ampliação de texto/reflow.
+Resultados e capturas ficam em `.landing-validation.local/production-review/`.
 
-O traço curvo que aparece sob o título do hero, entre seções e no rodapé
-(`GazeLine.tsx`) é desenhado como referência direta ao produto — a curva de
-um cílio / traço de eyeliner alado — e se anima ao entrar na tela. É o único
-elemento decorativo recorrente da página; todo o resto foi mantido deliberadamente
-quieto para não competir com ele.
+## Conteúdo e imagens
+
+- `src/data/site.ts`: textos, links, contatos, modelos e listas de fotos.
+- `tailwind.config.js`: paleta, tipografia e tokens visuais.
+- `src/components/Hero/Hero.tsx`: picture responsivo com uma única imagem do hero por largura.
+- `src/components/LashStyles/`: cartões e diálogo nativo das galerias.
+- `src/components/Gallery/`: carrossel com pausa e respeito a movimento reduzido.
+- `src/pages/Home/Home.tsx`: composição das seções.
+- `src/styles/globals.css`: estilos globais e componentes utilitários.
+
+Os originais ficam em `src/assets/`. Não os substitua por derivados comprimidos.
+Os WebPs existentes das galerias são usados nos cartões e na visualização ampliada.
+Consulte [o mapeamento e as instruções das galerias](docs/lash-galleries.md) antes de adicionar fotos.
+
+Para recriar apenas os derivados do hero, com Pillow instalado:
+
+```sh
+python scripts/optimize-hero-images.py
+```
+
+O script preserva a resolução e os originais. A foto móvel atual tem 302 × 533 px;
+uma fonte maior seria necessária para ganhar nitidez em telas densas.
+
+## Publicação
+
+Na Vercel, selecionar Vite, comando `npm run build` e diretório de saída `dist`.
+Nenhum domínio definitivo está configurado no projeto. Canonical, sitemap e
+imagem absoluta de compartilhamento devem ser definidos quando ele for confirmado.
+Não colocar segredos em variáveis `VITE_*`: elas são públicas no bundle.
+
+Veja [o relatório técnico e as limitações da revisão](docs/pre-publication-review.md).

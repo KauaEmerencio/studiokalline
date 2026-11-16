@@ -67,7 +67,7 @@ export default function SocialLinks() {
                   <span aria-hidden="true" className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full border sm:h-16 sm:w-16 ${CIRCLE_COLOR[link.key]}`}>
                     <Icon size={22} />
                   </span>
-                  <span className={`font-body text-[15px] leading-relaxed underline-offset-4 group-hover:underline group-focus-visible:underline ${link.key === "booking" ? "font-medium text-rose-700" : "text-ink-soft"}`}>
+                  <span className={`w-full break-words font-body text-[15px] leading-relaxed underline-offset-4 group-hover:underline group-focus-visible:underline ${link.key === "booking" ? "font-medium text-rose-700" : "text-ink-soft"}`}>
                     {link.label}
                   </span>
                 </a>

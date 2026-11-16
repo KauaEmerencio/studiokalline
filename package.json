@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+    "check:integrity": "node scripts/check-integrity.mjs",
+    "test": "node --test scripts/lash-galleries.test.cjs",
     "preview": "vite preview"
   },
   "dependencies": {

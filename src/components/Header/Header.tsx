@@ -33,11 +33,15 @@ export default function Header() {
 
   const toggle = () => {
     setOpen((v) => !v);
-    btnRef.current?.blur();
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className={`fixed inset-x-0 top-0 z-50 ${onPhoto ? "" : "bg-cream-soft/95 backdrop-blur-sm"}`} onKeyDown={(event) => {
+      if (open && event.key === "Escape") {
+        setOpen(false);
+        btnRef.current?.focus({ preventScroll: true });
+      }
+    }}>
       <div className="container-page flex h-16 items-center justify-between lg:h-20">
         <a href="#top" className="flex items-center">
           <img
@@ -94,7 +98,8 @@ export default function Header() {
             onClick={toggle}
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
-            className={`flex h-10 w-10 items-center justify-center rounded-full shadow-card backdrop-blur-sm transition-colors focus:outline-none focus-visible:outline-none ${
+            aria-controls={open ? "mobile-navigation" : undefined}
+            className={`flex h-10 w-10 items-center justify-center rounded-full shadow-card backdrop-blur-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
               onPhoto && !open
                 ? "bg-white/15 text-white hover:bg-white/25"
                 : "bg-cream/80 text-ink hover:bg-cream"
@@ -108,6 +113,8 @@ export default function Header() {
       <AnimatePresence>
         {open && (
           <motion.nav
+            id="mobile-navigation"
+            aria-label="Navegação principal"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}

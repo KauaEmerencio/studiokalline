@@ -1,9 +1,9 @@
 import { motion, type Variants } from "framer-motion";
-import { Plus } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import CTAButton from "../CTA/CTAButton";
 import { HERO } from "../../data/site";
-import heroImg from "../../assets/Hero.jpg";
-import heroImgDesktop from "../../assets/Hero2.jpg";
+import heroImg from "../../assets/optimized/hero-mobile.webp";
+import heroImgDesktop from "../../assets/optimized/hero-desktop.webp";
 
 const container: Variants = {
   hidden: {},
@@ -23,16 +23,17 @@ export default function Hero() {
   return (
     <section id="top" className="relative min-h-[100svh] w-full overflow-hidden bg-ink">
       {/* Foto de fundo — foto vertical no mobile, foto widescreen no desktop */}
-      <img
-        src={heroImg}
-        alt="Darc Kaline"
-        className="absolute inset-0 h-full w-full object-cover lg:hidden"
-      />
-      <img
-        src={heroImgDesktop}
-        alt="Darc Kaline"
-        className="absolute inset-0 hidden h-full w-full object-cover lg:block"
-      />
+      <picture>
+        <source media="(min-width: 1024px)" srcSet={heroImgDesktop} width={1537} height={1023} />
+        <img
+          src={heroImg}
+          alt="Darc Kaline"
+          width={302}
+          height={533}
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </picture>
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-ink/10 to-ink/95" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/15 to-transparent" />
@@ -57,16 +58,12 @@ export default function Hero() {
           variants={item}
           className="mt-2 block font-body text-[11px] font-light uppercase tracking-widest2 text-rose-200/80 sm:text-xs"
         >
-          — Lash Designer
+          Lash Designer
         </motion.span>
-
-        <motion.div variants={item} className="mt-2 text-rose-300/80">
-          <Plus size={14} strokeWidth={1.5} />
-        </motion.div>
 
         <motion.p
           variants={item}
-          className="mt-2 max-w-[16rem] font-body text-[13px] font-light leading-snug text-white/85 sm:max-w-sm sm:text-base sm:leading-relaxed"
+          className="mt-[30px] max-w-[16rem] font-body text-[13px] font-light leading-snug text-white/85 sm:max-w-sm sm:text-base sm:leading-relaxed"
         >
           {before}
           <span className="text-rose-300">{HERO.subtitleHighlight}</span>
@@ -77,20 +74,19 @@ export default function Hero() {
           <CTAButton />
         </motion.div>
 
-        <motion.p variants={item} className="mt-3 font-body text-[11px] font-light text-white/70 sm:text-[12px]">
-          {HERO.caption}
-          <a
-            href="#estilos"
-            className="mt-2 block w-fit text-rose-300 underline underline-offset-2 hover:text-rose-200"
-          >
-            {HERO.captionLink}
-          </a>
-        </motion.p>
+        <motion.a
+          variants={item}
+          href="#estilos"
+          className="mt-3 flex min-h-14 w-full items-center justify-center gap-3 rounded-full border border-rose-200 bg-cream px-5 py-4 font-body text-sm font-medium leading-normal text-rose-700 transition-colors hover:bg-cream-soft focus-visible:rounded-full focus-visible:outline-cream sm:min-h-16 sm:max-w-md"
+        >
+          {HERO.captionLink}
+          <ArrowDown size={16} strokeWidth={1.6} aria-hidden="true" className="shrink-0" />
+        </motion.a>
       </motion.div>
 
       <div className="absolute inset-x-0 bottom-0 z-10">
         <svg viewBox="0 0 400 44" preserveAspectRatio="none" className="block h-9 w-full sm:h-12 lg:h-16">
-          <path d="M0,22 C90,44 160,4 240,14 C310,23 350,6 400,16 L400,44 L0,44 Z" fill="#F6F1EB" />
+          <path d="M0,22 C90,44 160,4 240,14 C310,23 350,6 400,16 L400,45 L0,45 Z" fill="#F6F1EB" />
         </svg>
       </div>
     </section>
